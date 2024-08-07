@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/Features/home/data/Models/film_model.dart';
-import 'package:movie_app/core/services/Share%20Film/share_film_service.dart';
+import 'package:movie_app/Features/home/data/Repos/home_repo_implementation.dart';
+import 'package:movie_app/core/Functions/show_message.dart';
+import 'package:movie_app/core/utils/service_locator.dart';
 import 'package:movie_app/core/utils/text_styles.dart';
 
 class ShareButton extends StatelessWidget {
@@ -20,7 +22,7 @@ class ShareButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: InkWell(
             onTap: () async {
-              await ShareFilmService().share(film: film);
+              await shareFilm();
             },
             child: Container(
                 decoration: BoxDecoration(color: Colors.white.withOpacity(0.1)),
@@ -38,5 +40,15 @@ class ShareButton extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> shareFilm() async {
+    var tailerKey = await getIt<HomeRepoImplementation>()
+        .getFilmTailer(filmID: film.id.toString());
+    tailerKey.fold((l) async {
+      await getIt<HomeRepoImplementation>().shareFilm(film: film, tailerKey: l);
+    }, (r) {
+      showMessage(text: r.errMessage);
+    });
   }
 }

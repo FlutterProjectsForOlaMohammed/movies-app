@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movie_app/Features/home/presentation/manager/Films%20Category%20Bloc/films_category_bloc.dart';
+import 'package:movie_app/Features/home/presentation/views%20model/Films%20Category%20Bloc/films_category_bloc.dart';
 import 'package:movie_app/core/utils/constants.dart';
 
 class ShowOptionsList extends StatelessWidget {
@@ -27,35 +27,21 @@ class ShowOptionsList extends StatelessWidget {
       offset: const Offset(0, 45),
       iconSize: 30,
       itemBuilder: (context) => <PopupMenuEntry>[
-        PopupMenuItem(
-          value: showFilmsOptions[0],
-          child: Text(showFilmsOptions[0],
-              style: GoogleFonts.akatab(
-                  color: kPrimaryColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600)),
-        ),
-        PopupMenuItem(
-          value: showFilmsOptions[1],
-          child: Text(
-            showFilmsOptions[1],
-            style: GoogleFonts.akatab(
-                color: kPrimaryColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w600),
-          ),
-        ),
-        PopupMenuItem(
-          value: showFilmsOptions[2],
-          child: Text(
-            showFilmsOptions[2],
-            style: GoogleFonts.akatab(
-                color: kPrimaryColor,
-                fontSize: 20,
-                fontWeight: FontWeight.w600),
-          ),
-        ),
+        popUpItem(text: showFilmsOptions[0]),
+        popUpItem(text: showFilmsOptions[1]),
+        popUpItem(text: showFilmsOptions[2]),
       ],
+    );
+  }
+
+  PopupMenuItem<dynamic> popUpItem({required String text}) {
+    return PopupMenuItem(
+      value: text,
+      child: Text(
+        text,
+        style: GoogleFonts.akatab(
+            color: kPrimaryColor, fontSize: 20, fontWeight: FontWeight.w600),
+      ),
     );
   }
 }

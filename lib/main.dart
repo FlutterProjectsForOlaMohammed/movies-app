@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_app/core/observer/simple_bloc_observer.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/constants.dart';
+import 'package:movie_app/core/utils/service_locator.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
+  setup();
   runApp(const MovieApp());
 }
 

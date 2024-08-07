@@ -67,18 +67,20 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void goToHomeView() {
-    Future.delayed(const Duration(seconds: 7)).then((value) {
-      GoRouter.of(context).push(AppRoutes.homeView);
-    });
+    Future.delayed(const Duration(seconds: 3)).then(
+      (value) {
+        GoRouter.of(context).push(AppRoutes.homeView);
+      },
+    );
   }
 
   void scaleAnimationInitialization() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5),
+      duration: const Duration(seconds: 2),
     );
     scaleAnimation =
-        IntTween(begin: 70, end: 250).animate(_animationController);
+        IntTween(begin: 70, end: 170).animate(_animationController);
     _animationController.forward();
   }
 }
